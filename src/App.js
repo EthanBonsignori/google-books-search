@@ -14,7 +14,7 @@ class App extends Component {
         <Container>
           <Navbar bg='light' expand='lg'>
             <Navbar.Brand href='/'>
-              <img src={logo} width='30' height='30' />
+              <img src={logo} width='30' height='30' alt='Books' />
             </Navbar.Brand>
             <Navbar.Brand href='/'>Google Books</Navbar.Brand>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
@@ -26,8 +26,8 @@ class App extends Component {
             </Navbar.Collapse>
           </Navbar>
           <Route path='/' exact component={SavedBooks} />
-          <Route path='/search' exact component={SearchBooks} />
-          <Route path='/saved' exact component={SavedBooks} />
+          <Route path='/search' component={SearchBooks} />
+          <Route path='/saved' component={SavedBooks} />
         </Container>
       </Router>
     )
