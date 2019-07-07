@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
+
+const API_KEY = process.env.REACT_APP_BOOKS_API_KEY
 
 class SearchBooks extends Component {
   constructor (props) {
@@ -23,6 +27,7 @@ class SearchBooks extends Component {
     e.preventDefault()
 
     console.log(`Search input: ${this.state.searchInput}`)
+    console.log(API_KEY)
 
     this.setState({
       searchInput: ''
@@ -42,7 +47,9 @@ class SearchBooks extends Component {
                 onChange={this.onChangeSearchInput} />
             </Form.Group>
             <Form.Group>
-              <Form.Control type='submit' value='Search' className='btn btn-primary' />
+              <Button type='submit' variant='primary' block>
+                <FontAwesomeIcon icon={faSearch} />
+              </Button>
             </Form.Group>
           </Form>
         </Card.Body>

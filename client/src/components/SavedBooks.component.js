@@ -5,6 +5,7 @@ class SavedBooks extends Component {
     return (
       <div>
         <h2>This is the SavedBooks Component.</h2>
+        <h2>Saved books will appear here</h2>
       </div>
     )
   }
