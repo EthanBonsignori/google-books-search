@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const logger = require('morgan')
+const cors = require('cors')
 const path = require('path')
 const Book = require('./schema/Book.model')
 const app = express()
@@ -9,8 +10,8 @@ const PORT = process.env.PORT || 4000
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/googlebooks'
 
 // Middleware
-app.use('/books', bookRoutes)
 app.use(logger('dev'))
+app.use(cors())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
@@ -20,8 +21,6 @@ if (process.env.NODE_ENV === 'production') {
 
 // Routes
 bookRoutes.route('/').get((req, res) => {
-  // const dbBook = await Book.find({})
-  // res.status(200).json(dbBook)
   Book.find((err, books) => {
     if (!books) return res.status(404).json({ message: 'No saved books found.' })
     if (err) return res.status(400).json({ message: 'Finding saved books failed', error: err.name })
@@ -29,14 +28,15 @@ bookRoutes.route('/').get((req, res) => {
   })
 })
 
-bookRoutes.route('/save').post((req, res) => {
+bookRoutes.route('/').post(async (req, res) => {
+  if (!req.body) return res.status(400).json({ message: 'Error saving book', error: 'Did not receive data in req.body' })
   const book = new Book(req.body)
   book.save()
     .then(book => {
-      res.status(200).json({ 'message': 'Book saved successfully' })
+      console.log(book)
+      res.status(200).json({ message: 'Book saved successfully' })
     })
     .catch(err => {
-      console.error(err)
       res.status(400).json({ message: 'Saving book failed', error: err.name })
     })
 })
@@ -65,6 +65,7 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/public/index.html'))
 })
 
+app.use('/books', bookRoutes)
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
 mongoose.connection.once('open', () => {
   console.log('MongoDB connection established')
