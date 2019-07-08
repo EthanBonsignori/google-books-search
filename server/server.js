@@ -28,7 +28,7 @@ bookRoutes.route('/').get((req, res) => {
   })
 })
 
-bookRoutes.route('/').post(async (req, res) => {
+bookRoutes.route('/').post((req, res) => {
   if (!req.body) return res.status(400).json({ message: 'Error saving book', error: 'Did not receive data in req.body' })
   const book = new Book(req.body)
   book.save()
