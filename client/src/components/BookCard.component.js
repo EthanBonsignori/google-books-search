@@ -22,7 +22,7 @@ class BookCard extends Component {
 
   componentDidMount () {
     this.setState({
-      id: this.props.key,
+      id: this.props.id,
       authors: this.props.authors,
       description: this.props.description,
       image: this.props.image,
@@ -51,19 +51,23 @@ class BookCard extends Component {
     notify(content.message)
   }
 
-  // async unsaveBook () {
-  //   const id = this.state.id
-  //   const fetchRes = await window.fetch('http://')
-  // }
+  async unsaveBook () {
+    const id = this.state.id
+    const fetchRes = await window.fetch(`http://localhost:4000/books/${id}`, { method: 'DELETE' })
+    const content = await fetchRes.json()
+    this.props.getBooksFromDb()
+    notify(content.message)
+  }
 
   render () {
+    const { fromSaved } = this.props
     let hasImage = true
     if (this.state.image === 'false') hasImage = false
 
     return (
       <div>
         <Notification />
-        <Card>
+        <Card style={{ marginTop: '1rem' }}>
           <Card.Header>
             {this.state.title}
             <span style={{ opacity: '0.8', fontSize: '0.75rem', marginLeft: '1rem' }}>
@@ -76,7 +80,7 @@ class BookCard extends Component {
                 target='_blank'>
                   View
               </Button>{' '}
-              {this.props.fromSaved ? (
+              {fromSaved ? (
                 <Button variant='outline-danger'
                   size='sm'
                   onClick={() => this.unsaveBook()}>

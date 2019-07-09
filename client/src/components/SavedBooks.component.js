@@ -8,11 +8,18 @@ class SavedBooks extends Component {
     super(props)
 
     this.state = {
-      books: null
+      books: null,
+      update: 0
     }
+
+    this.getBooksFromDb = this.getBooksFromDb.bind(this)
   }
 
-  async componentWillMount () {
+  componentDidMount () {
+    this.getBooksFromDb()
+  }
+
+  async getBooksFromDb () {
     const fetchRes = await window.fetch('http://localhost:4000/books', { method: 'GET' })
     const content = await fetchRes.json()
     this.setState({
@@ -25,12 +32,14 @@ class SavedBooks extends Component {
       let hasImage = true
       if (book.image === 'false') hasImage = false
       return <BookCard key={book._id}
+        id={book._id}
         authors={book.authors}
         description={book.description}
         fromSaved
         image={hasImage ? book.image : 'false'}
         link={book.infoLink}
         title={book.title}
+        getBooksFromDb={this.getBooksFromDb}
       />
     })
 

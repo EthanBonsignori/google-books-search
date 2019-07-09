@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import ee from 'event-emitter'
+import EE from 'event-emitter'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 
@@ -19,7 +19,7 @@ const NotificationDiv = styled.div`
   transition: top 0.5s ease;
 `
 
-const emitter = new ee()
+const emitter = new EE()
 
 export const notify = (msg) => {
   emitter.emit('notification', msg)

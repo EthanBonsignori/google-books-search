@@ -55,7 +55,7 @@ bookRoutes.route('/').post((req, res) => {
 // })
 
 bookRoutes.route('/:id').delete((req, res) => {
-  Book.findById(req.params.id, (err, book) => {
+  Book.findByIdAndDelete(req.params.id, (err, book) => {
     if (!book) return res.status(404).json({ message: 'No saved book found with that ID' })
     if (err) return res.status(400).json({ message: `${err.name} | Removing saved book failed` })
     else return res.status(200).json({ message: `Successfully removed ${book.title} from saved books` })
