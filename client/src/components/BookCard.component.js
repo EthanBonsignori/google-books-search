@@ -13,14 +13,14 @@ class BookCard extends Component {
     }
   }
 
-  componentDidMount (props) {
-    console.log(props)
+  componentDidMount () {
+    console.log(this.props)
   }
 
   render (props) {
     return (
       <div>
-        <p>{props}</p>
+        <p>{this.props.title}</p>
       </div>
     )
   }

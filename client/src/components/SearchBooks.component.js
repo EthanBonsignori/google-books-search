@@ -23,10 +23,6 @@ class SearchBooks extends Component {
     })
   }
 
-  componentWillMount () {
-
-  }
-
   onSubmit (e) {
     e.preventDefault()
     this.search(this.state.query)
@@ -37,7 +33,7 @@ class SearchBooks extends Component {
 
   search (query) {
     const API_KEY = process.env.REACT_APP_BOOKS_API_KEY
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${query || ''}&key=${API_KEY}`
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${query || 'Harry Potter'}&key=${API_KEY}`
     window.fetch(url, { method: 'GET' })
       .then(results => {
         return results.json()
@@ -55,7 +51,16 @@ class SearchBooks extends Component {
   render () {
     const cardStyle = { marginTop: '3rem' }
     const books = _.map(this.state.books, (book) => {
-      return <li>{book.volumeInfo.title}</li>
+      const bookInfo = book.volumeInfo
+      let hasImage = true
+      if (bookInfo.imageLinks === undefined) hasImage = false
+      return <BookCard key={book.id}
+        authors={bookInfo.authors}
+        description={bookInfo.description}
+        image={hasImage ? bookInfo.imageLinks.thumbnail : false}
+        link={bookInfo.infoLink}
+        title={bookInfo.title}
+      />
     })
     return (
       <div>
