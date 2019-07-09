@@ -8,7 +8,6 @@ import BookCard from './BookCard.component.js'
 class SearchBooks extends Component {
   constructor () {
     super()
-
     this.state = {
       query: ''
     }

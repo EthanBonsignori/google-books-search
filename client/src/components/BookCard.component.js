@@ -12,6 +12,7 @@ class BookCard extends Component {
       link: '',
       title: ''
     }
+    this.saveBook = this.saveBook.bind(this)
   }
 
   componentDidMount () {
@@ -24,6 +25,10 @@ class BookCard extends Component {
     })
   }
 
+  saveBook () {
+
+  }
+
   render () {
     return (
       <div>
@@ -31,8 +36,7 @@ class BookCard extends Component {
           <Card.Header>
             {this.state.title}
             <span style={{ opacity: '0.8', fontSize: '0.75rem', marginLeft: '1rem' }}>
-              By: {this.state.authors ? this.state.authors.join(', ') : 'Unknown'}
-              {console.log(this.state.authors)}
+              {this.state.authors ? `By: ${this.state.authors.join(', ')}` : 'No author provided'}
             </span>
             <div className='float-right'>
               <Button variant='outline-info'
@@ -41,7 +45,11 @@ class BookCard extends Component {
                 target='_blank'>
                   View
               </Button>{' '}
-              <Button variant='outline-primary' size='sm'>Save</Button>
+              <Button variant='outline-primary'
+                size='sm'
+                onClick={() => this.saveBook()}>
+                  Save
+              </Button>
             </div>
           </Card.Header>
           <Row style={{ padding: '0.5rem 1rem' }}>
