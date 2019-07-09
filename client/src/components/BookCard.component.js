@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card'
 
 class BookCard extends Component {
   constructor (props) {
@@ -20,7 +20,9 @@ class BookCard extends Component {
   render (props) {
     return (
       <div>
-        <p>{this.props.title}</p>
+        <Card>
+          <p>{this.props.title}</p>
+        </Card>
       </div>
     )
   }
