@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import logo from '../logo.png'
+import booksLogo from '../books-logo.png'
 
 class MyNavbar extends Component {
   render () {
     return (
       <Navbar bg='light' variant='light' expand='lg'>
         <Navbar.Brand href='/'>
-          <img src={logo} width='30' height='30' alt='Books' />
+          <img src={booksLogo} width='30' height='30' alt='Books' />
         </Navbar.Brand>
         <Navbar.Brand href='/'>Google Books</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />

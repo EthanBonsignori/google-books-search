@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
-import { Card, Form, Button } from 'react-bootstrap'
+import { Container, Card, Form, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import BookCard from './BookCard.component.js'
@@ -86,7 +86,9 @@ class SearchBooks extends Component {
         <Card style={cardStyle}>
           <Card.Header>Results</Card.Header>
           <Card.Body>
-            <ul>{books}</ul>
+            <Container>
+              {books}
+            </Container>
           </Card.Body>
         </Card>
       </div>
