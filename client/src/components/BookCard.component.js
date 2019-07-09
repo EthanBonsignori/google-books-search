@@ -5,6 +5,7 @@ import noThumbnail from '../no-thumbnail.png'
 class BookCard extends Component {
   constructor (props) {
     super(props)
+
     this.state = {
       authors: [],
       description: '',
@@ -12,6 +13,7 @@ class BookCard extends Component {
       link: '',
       title: ''
     }
+
     this.saveBook = this.saveBook.bind(this)
   }
 
@@ -25,11 +27,30 @@ class BookCard extends Component {
     })
   }
 
-  saveBook () {
-
+  async saveBook () {
+    const newSavedBook = {
+      authors: this.state.authors || 'No author provided',
+      description: this.state.description || 'No description provided',
+      image: this.state.image,
+      link: this.state.link,
+      title: this.state.title
+    }
+    const fetchRes = await window.fetch('http://localhost:4000/books', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newSavedBook)
+    })
+    const content = await fetchRes.json()
+    console.log(content)
   }
 
   render () {
+    let hasImage = true
+    if (this.state.image === 'false') hasImage = false
+
     return (
       <div>
         <Card>
@@ -54,14 +75,14 @@ class BookCard extends Component {
           </Card.Header>
           <Row style={{ padding: '0.5rem 1rem' }}>
             <Col xs={2} style={{ paddingLeft: '1rem' }}>
-              {this.state.image ? (
+              {hasImage ? (
                 <Image src={this.state.image} thumbnail fluid />
               ) : (
                 <Image src={noThumbnail} thumbnail fluid />
               )}
             </Col>
             <Col xs={10} style={{ paddingLeft: '0', overflow: 'hidden', textOverflow: 'ellipsis', maxHeight: '218px' }}>
-              {this.state.description || 'No description provided.'}
+              {this.state.description || 'No description provided'}
             </Col>
           </Row>
         </Card>

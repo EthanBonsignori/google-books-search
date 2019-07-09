@@ -8,6 +8,7 @@ import BookCard from './BookCard.component.js'
 class SearchBooks extends Component {
   constructor () {
     super()
+
     this.state = {
       query: ''
     }
@@ -56,7 +57,7 @@ class SearchBooks extends Component {
       return <BookCard key={book.id}
         authors={bookInfo.authors}
         description={bookInfo.description}
-        image={hasImage ? bookInfo.imageLinks.thumbnail : false}
+        image={hasImage ? bookInfo.imageLinks.thumbnail : 'false'}
         link={bookInfo.infoLink}
         title={bookInfo.title}
       />

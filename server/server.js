@@ -33,7 +33,6 @@ bookRoutes.route('/').post((req, res) => {
   const book = new Book(req.body)
   book.save()
     .then(book => {
-      console.log(book)
       res.status(200).json({ message: 'Book saved successfully' })
     })
     .catch(err => {
