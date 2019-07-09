@@ -57,6 +57,7 @@ class SearchBooks extends Component {
       return <BookCard key={book.id}
         authors={bookInfo.authors}
         description={bookInfo.description}
+        fromSaved={false}
         image={hasImage ? bookInfo.imageLinks.thumbnail : 'false'}
         link={bookInfo.infoLink}
         title={bookInfo.title}
@@ -82,7 +83,6 @@ class SearchBooks extends Component {
             </Form>
           </Card.Body>
         </Card>
-
         <Card style={cardStyle}>
           <Card.Header>Results</Card.Header>
           <Card.Body>

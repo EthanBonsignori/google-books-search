@@ -12,7 +12,8 @@ const BookSchema = new Schema({
     type: String
   },
   link: {
-    type: String
+    type: String,
+    unique: true
   },
   title: {
     type: String

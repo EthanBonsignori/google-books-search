@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap'
+import Notification, { notify } from './Notification.component'
 import noThumbnail from '../no-thumbnail.png'
 
 class BookCard extends Component {
@@ -7,6 +8,7 @@ class BookCard extends Component {
     super(props)
 
     this.state = {
+      id: null,
       authors: [],
       description: '',
       image: '',
@@ -15,10 +17,12 @@ class BookCard extends Component {
     }
 
     this.saveBook = this.saveBook.bind(this)
+    this.unsaveBook = this.unsaveBook.bind(this)
   }
 
   componentDidMount () {
     this.setState({
+      id: this.props.key,
       authors: this.props.authors,
       description: this.props.description,
       image: this.props.image,
@@ -44,8 +48,13 @@ class BookCard extends Component {
       body: JSON.stringify(newSavedBook)
     })
     const content = await fetchRes.json()
-    console.log(content)
+    notify(content.message)
   }
+
+  // async unsaveBook () {
+  //   const id = this.state.id
+  //   const fetchRes = await window.fetch('http://')
+  // }
 
   render () {
     let hasImage = true
@@ -53,6 +62,7 @@ class BookCard extends Component {
 
     return (
       <div>
+        <Notification />
         <Card>
           <Card.Header>
             {this.state.title}
@@ -66,11 +76,19 @@ class BookCard extends Component {
                 target='_blank'>
                   View
               </Button>{' '}
-              <Button variant='outline-primary'
-                size='sm'
-                onClick={() => this.saveBook()}>
+              {this.props.fromSaved ? (
+                <Button variant='outline-danger'
+                  size='sm'
+                  onClick={() => this.unsaveBook()}>
+                  Unsave
+                </Button>
+              ) : (
+                <Button variant='outline-primary'
+                  size='sm'
+                  onClick={() => this.saveBook()}>
                   Save
-              </Button>
+                </Button>
+              )}
             </div>
           </Card.Header>
           <Row style={{ padding: '0.5rem 1rem' }}>
