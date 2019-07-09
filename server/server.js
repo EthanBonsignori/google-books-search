@@ -25,17 +25,17 @@ app.use('/books', bookRoutes)
 bookRoutes.route('/').get((req, res) => {
   Book.find((err, books) => {
     if (!books) return res.status(404).json({ message: 'No saved books found.' })
-    if (err) return res.status(400).json({ message: `${err.name} | Error when retrieving saved books` })
+    if (err) return res.status(400).json({ message: `${err.name} | Error retrieving saved books` })
     else res.status(200).json(books)
   })
 })
 
 bookRoutes.route('/').post((req, res) => {
-  if (!req.body) return res.status(400).json({ message: 'Error when saving book | Did not receive any data' })
+  if (!req.body) return res.status(400).json({ message: 'Error saving book | Did not receive any data' })
   const book = new Book(req.body)
   book.save()
     .then(book => {
-      res.status(200).json({ message: `${book.title} saved successfully` })
+      res.status(200).json({ message: `${book.title} added to saved books` })
     })
     .catch(err => {
       let errmsg = ''
@@ -45,20 +45,11 @@ bookRoutes.route('/').post((req, res) => {
     })
 })
 
-// bookRoutes.route('/:id').put((req, res) => {
-//   const isSaved = req.body.saved
-//   Book.findByIdAndUpdate(req.params.id, (err, book) => {
-//     if (!book) return res.status(404).json({ message: 'No saved book found with that ID' })
-//     if (err) return res.status(400).json({ message: 'Updating saved book failed', error: err.name })
-//     else res.status(200).json({ message: 'Successfully updated book' })
-//   })
-// })
-
 bookRoutes.route('/:id').delete((req, res) => {
   Book.findByIdAndDelete(req.params.id, (err, book) => {
     if (!book) return res.status(404).json({ message: 'No saved book found with that ID' })
     if (err) return res.status(400).json({ message: `${err.name} | Removing saved book failed` })
-    else return res.status(200).json({ message: `Successfully removed ${book.title} from saved books` })
+    else return res.status(200).json({ message: `Removed ${book.title} from saved books` })
   })
 })
 
