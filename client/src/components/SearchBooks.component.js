@@ -87,7 +87,7 @@ class SearchBooks extends Component {
           <Card.Header>Results</Card.Header>
           <Card.Body>
             <Container>
-              {books}
+              {books.length ? books : <span>No Results</span>}
             </Container>
           </Card.Body>
         </Card>

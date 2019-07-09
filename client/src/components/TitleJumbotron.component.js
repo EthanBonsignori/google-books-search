@@ -14,8 +14,7 @@ class TitleJumbotron extends Component {
           Books Search
         </h1>
         <p className='lead'>Search for and Save your Favorite Books</p>
-        <p className='mt-5 mb-0'>Powered by{' '}
-          {/* <img src={reactLogo} width='20' alt='React' /> */}
+        <p className='mt-5 mb-0 font-weight-light'>Powered by{' '}
           <span style={{ color: '#61DAFB', fontWeight: 'bold' }}>
             <FontAwesomeIcon icon={faReact} /> React
           </span>
