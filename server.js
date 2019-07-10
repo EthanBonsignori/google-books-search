@@ -2,6 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const logger = require('morgan')
 const cors = require('cors')
+const path = require('path')
 const routes = require('./routes')
 const app = express()
 const PORT = process.env.PORT || 4000
@@ -18,6 +19,11 @@ app.use(routes)
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
+
+// Send every other request to the React app
+app.use('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+})
 
 mongoose.connect(MONGODB_URI, {
   useCreateIndex: true,
