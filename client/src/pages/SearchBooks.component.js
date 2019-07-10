@@ -34,7 +34,7 @@ class SearchBooks extends Component {
 
   async search (query) {
     const content = await searchGoogleBooks(query)
-    if (content.error) return this.props.notify(content.message)
+    if (content.error) return this.props.notify(content.message || content.error.message)
     this.setState({ books: content.items })
   }
 
