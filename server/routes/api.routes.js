@@ -1,7 +1,7 @@
 const router = require('express').Router()
-const apiController = require('../../controllers/apiController')
+const apiController = require('../controllers/apiController')
 
-// Matches with "/api/books"
+// Matches with '/api/:query'
 router.route('/:query')
   .get(apiController.search)
 

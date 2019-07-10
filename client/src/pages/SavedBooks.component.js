@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Container, Card } from 'react-bootstrap'
+import { getBooks } from '../utils/db'
 import BookCard from '../components/BookCard.component'
 
 class SavedBooks extends Component {
@@ -8,23 +9,19 @@ class SavedBooks extends Component {
     super(props)
 
     this.state = {
-      books: null,
-      update: 0
+      books: null
     }
 
     this.getBooksFromDb = this.getBooksFromDb.bind(this)
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.getBooksFromDb()
   }
 
   async getBooksFromDb () {
-    const fetchRes = await window.fetch('http://localhost:4000/books', { method: 'GET' })
-    const content = await fetchRes.json()
-    this.setState({
-      books: content
-    })
+    const books = await getBooks()
+    this.setState({ books })
   }
 
   render () {
@@ -37,7 +34,7 @@ class SavedBooks extends Component {
         description={book.description}
         fromSaved
         image={hasImage ? book.image : 'false'}
-        link={book.infoLink}
+        link={book.link}
         title={book.title}
         getBooksFromDb={this.getBooksFromDb}
       />

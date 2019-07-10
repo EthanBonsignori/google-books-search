@@ -3,7 +3,9 @@ import _ from 'lodash'
 import { Container, Card, Form, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import api from '../utils/api'
 import BookCard from '../components/BookCard.component'
+import Notification, { notify } from '../components/Notification.component'
 
 class SearchBooks extends Component {
   constructor () {
@@ -32,12 +34,8 @@ class SearchBooks extends Component {
   }
 
   async search (query) {
-    let url
-    // if (process.env.NODE_ENV === 'production') url = `/api/${query}`
-    url = `http://localhost:4000/api/${query}`
-    const fetchRes = await window.fetch(url, { method: 'GET', 'Content-Type': 'application/json' })
-    const content = await fetchRes.json()
-    console.log(content)
+    const content = await api.searchGoogleBooks(query)
+    if (content.error) return notify(content.message)
     this.setState({ books: content.items })
   }
 
@@ -58,6 +56,7 @@ class SearchBooks extends Component {
     })
     return (
       <div>
+        <Notification />
         <Card style={cardStyle}>
           <Card.Header>Book Search</Card.Header>
           <Card.Body>
