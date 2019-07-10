@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Container from 'react-bootstrap/Container'
 import MyNavbar from './MyNavbar.component'
 import Notification, { notify } from './Notification.component'
@@ -21,8 +21,7 @@ class App extends Component {
         <Notification />
         <Container>
           <TitleJumbotron />
-          <Redirect exact path='/' to='/search' />
-          <Route path='/search' render={props => <SearchBooks notify={this.newNotify} />} />
+          <Route exact path='/' render={props => <SearchBooks notify={this.newNotify} />} />
           <Route path='/saved' render={props => <SavedBooks notify={this.newNotify} />} />
         </Container>
       </Router>

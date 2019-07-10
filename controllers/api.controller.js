@@ -1,5 +1,4 @@
 const fetch = require('node-fetch')
-require('dotenv').config()
 
 module.exports = {
   search: async (req, res) => {

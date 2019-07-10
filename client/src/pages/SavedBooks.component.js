@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { Container, Card } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBookmark } from '@fortawesome/free-regular-svg-icons'
-import { getBooks } from '../utils/db'
+import db from '../utils/db'
 import BookCard from '../components/BookCard.component'
 
 class SavedBooks extends Component {
@@ -22,7 +22,7 @@ class SavedBooks extends Component {
   }
 
   async getBooksFromDb () {
-    const books = await getBooks()
+    const books = await db.getBooks()
     this.setState({ books })
   }
 

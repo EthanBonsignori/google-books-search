@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap'
-import { saveBook, unsaveBook } from '../utils/db'
+import db from '../utils/db'
 import noThumbnail from '../assets/images/no-thumbnail.png'
 
 class BookCard extends Component {
@@ -39,13 +39,13 @@ class BookCard extends Component {
       link: this.state.link,
       title: this.state.title
     }
-    const status = await saveBook(newSavedBook)
+    const status = await db.saveBook(newSavedBook)
     this.props.notify(status.message)
   }
 
   async unsaveBook () {
     const id = this.state.id
-    const status = await unsaveBook(id)
+    const status = await db.unsaveBook(id)
     this.props.notify(status.message)
     this.props.getBooksFromDb()
   }
