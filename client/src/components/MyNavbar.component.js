@@ -16,7 +16,7 @@ class MyNavbar extends Component {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='mr-auto'>
             <Nav.Item>
-              <NavLink to='/search' className='nav-link'>Search</NavLink>
+              <NavLink to='/' className='nav-link'>Search</NavLink>
             </Nav.Item>
             <Nav.Item>
               <NavLink to='/saved' className='nav-link'>Saved</NavLink>

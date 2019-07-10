@@ -9,7 +9,7 @@ class TitleJumbotron extends Component {
     const style = {
       marginTop: '3rem',
       textAlign: 'center',
-      backgroundColor: '#F7F7F7ad'
+      backgroundColor: '#F7F7F7'
     }
     return (
       <Jumbotron style={style}>
