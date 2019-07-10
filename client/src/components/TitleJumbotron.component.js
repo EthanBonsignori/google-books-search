@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReact } from '@fortawesome/free-brands-svg-icons'
-import googleLogo from '../google-logo.png'
+import googleLogo from '../assets/images/google-logo.png'
 
 class TitleJumbotron extends Component {
   render () {

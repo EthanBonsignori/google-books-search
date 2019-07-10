@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
-import booksLogo from '../books-logo.png'
+import booksLogo from '../assets/images/books-logo.png'
 
 class MyNavbar extends Component {
   render () {
