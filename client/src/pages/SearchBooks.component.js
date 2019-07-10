@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import { Container, Card, Form, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons'
 import api from '../utils/api'
 import BookCard from '../components/BookCard.component'
 import Notification, { notify } from '../components/Notification.component'
@@ -58,7 +58,10 @@ class SearchBooks extends Component {
       <div>
         <Notification />
         <Card style={cardStyle}>
-          <Card.Header>Book Search</Card.Header>
+          <Card.Header>
+            <FontAwesomeIcon icon={faBook} />
+            {' '}Book Search
+          </Card.Header>
           <Card.Body>
             <Form onSubmit={this.onSubmit}>
               <Form.Group controlId='formGroupSearch'>
@@ -76,7 +79,10 @@ class SearchBooks extends Component {
           </Card.Body>
         </Card>
         <Card style={cardStyle}>
-          <Card.Header>Results</Card.Header>
+          <Card.Header>
+            <FontAwesomeIcon icon={faBookOpen} />
+            {' '}Results
+          </Card.Header>
           <Card.Body>
             <Container>
               {books.length ? books : <span>No Results</span>}

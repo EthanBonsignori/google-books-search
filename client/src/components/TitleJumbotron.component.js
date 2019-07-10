@@ -6,8 +6,13 @@ import googleLogo from '../assets/images/google-logo.png'
 
 class TitleJumbotron extends Component {
   render () {
+    const style = {
+      marginTop: '3rem',
+      textAlign: 'center',
+      backgroundColor: '#F7F7F7ad'
+    }
     return (
-      <Jumbotron style={{ marginTop: '3rem', textAlign: 'center' }}>
+      <Jumbotron style={style}>
         <h1>
           <img src={googleLogo} width='125' alt='Google' />
           <span>{' '}</span>

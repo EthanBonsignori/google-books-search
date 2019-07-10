@@ -5,6 +5,7 @@ import MyNavbar from './MyNavbar.component'
 import TitleJumbotron from './TitleJumbotron.component'
 import SavedBooks from '../pages/SavedBooks.component'
 import SearchBooks from '../pages/SearchBooks.component'
+import '../assets/css/App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component {
