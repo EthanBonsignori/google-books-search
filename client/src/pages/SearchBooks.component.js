@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { Container, Card, Form, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons'
-import api from '../utils/api'
+import { searchGoogleBooks } from '../utils/api'
 import BookCard from '../components/BookCard.component'
 
 class SearchBooks extends Component {
@@ -33,7 +33,7 @@ class SearchBooks extends Component {
   }
 
   async search (query) {
-    const content = await api.searchGoogleBooks(query)
+    const content = await searchGoogleBooks(query)
     if (content.error) return this.props.notify(content.message)
     this.setState({ books: content.items })
   }
