@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Container, Card } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark } from '@fortawesome/free-regular-svg-icons'
 import { getBooks } from '../utils/db'
 import BookCard from '../components/BookCard.component'
 
@@ -43,7 +45,10 @@ class SavedBooks extends Component {
     return (
       <div>
         <Card style={{ marginTop: '3rem' }}>
-          <Card.Header>Results</Card.Header>
+          <Card.Header>
+            <FontAwesomeIcon icon={faBookmark} />
+            {' '}Saved Books
+          </Card.Header>
           <Card.Body>
             <Container>
               {books.length ? books : <span>No saved books</span>}
