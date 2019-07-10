@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReact } from '@fortawesome/free-brands-svg-icons'
-import googleLogo from '../google-logo.png'
+import googleLogo from '../assets/images/google-logo.png'
 
 class TitleJumbotron extends Component {
   render () {
+    const style = {
+      marginTop: '3rem',
+      textAlign: 'center',
+      backgroundColor: '#F7F7F7ad'
+    }
     return (
-      <Jumbotron style={{ marginTop: '3rem', textAlign: 'center' }}>
+      <Jumbotron style={style}>
         <h1>
           <img src={googleLogo} width='125' alt='Google' />
           <span>{' '}</span>

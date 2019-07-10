@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap'
 import Notification, { notify } from './Notification.component'
-import noThumbnail from '../no-thumbnail.png'
+import { saveBook, unsaveBook } from '../utils/db'
+import noThumbnail from '../assets/images/no-thumbnail.png'
 
 class BookCard extends Component {
   constructor (props) {
@@ -39,24 +40,15 @@ class BookCard extends Component {
       link: this.state.link,
       title: this.state.title
     }
-    const fetchRes = await window.fetch('http://localhost:4000/books', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newSavedBook)
-    })
-    const content = await fetchRes.json()
-    notify(content.message)
+    const status = await saveBook(newSavedBook)
+    notify(status.message)
   }
 
   async unsaveBook () {
     const id = this.state.id
-    const fetchRes = await window.fetch(`http://localhost:4000/books/${id}`, { method: 'DELETE' })
-    const content = await fetchRes.json()
+    const status = await unsaveBook(id)
+    notify(status.message)
     this.props.getBooksFromDb()
-    notify(content.message)
   }
 
   render () {

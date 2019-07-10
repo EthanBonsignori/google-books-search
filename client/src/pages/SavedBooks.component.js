@@ -1,30 +1,29 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Container, Card } from 'react-bootstrap'
-import BookCard from './BookCard.component.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark } from '@fortawesome/free-regular-svg-icons'
+import { getBooks } from '../utils/db'
+import BookCard from '../components/BookCard.component'
 
 class SavedBooks extends Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      books: null,
-      update: 0
+      books: null
     }
 
     this.getBooksFromDb = this.getBooksFromDb.bind(this)
   }
 
-  componentDidMount () {
+  componentWillMount () {
     this.getBooksFromDb()
   }
 
   async getBooksFromDb () {
-    const fetchRes = await window.fetch('http://localhost:4000/books', { method: 'GET' })
-    const content = await fetchRes.json()
-    this.setState({
-      books: content
-    })
+    const books = await getBooks()
+    this.setState({ books })
   }
 
   render () {
@@ -37,7 +36,7 @@ class SavedBooks extends Component {
         description={book.description}
         fromSaved
         image={hasImage ? book.image : 'false'}
-        link={book.infoLink}
+        link={book.link}
         title={book.title}
         getBooksFromDb={this.getBooksFromDb}
       />
@@ -46,7 +45,10 @@ class SavedBooks extends Component {
     return (
       <div>
         <Card style={{ marginTop: '3rem' }}>
-          <Card.Header>Results</Card.Header>
+          <Card.Header>
+            <FontAwesomeIcon icon={faBookmark} />
+            {' '}Saved Books
+          </Card.Header>
           <Card.Body>
             <Container>
               {books.length ? books : <span>No saved books</span>}

@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import { Container, Card, Form, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import BookCard from './BookCard.component.js'
+import { faSearch, faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons'
+import api from '../utils/api'
+import BookCard from '../components/BookCard.component'
+import Notification, { notify } from '../components/Notification.component'
 
 class SearchBooks extends Component {
   constructor () {
@@ -31,21 +33,10 @@ class SearchBooks extends Component {
     })
   }
 
-  search (query) {
-    const API_KEY = process.env.REACT_APP_BOOKS_API_KEY
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${query || 'Harry Potter'}&key=${API_KEY}`
-    window.fetch(url, { method: 'GET' })
-      .then(results => {
-        return results.json()
-      })
-      .then(booksJson => {
-        this.setState({
-          books: booksJson.items
-        })
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  async search (query) {
+    const content = await api.searchGoogleBooks(query)
+    if (content.error) return notify(content.message)
+    this.setState({ books: content.items })
   }
 
   render () {
@@ -65,8 +56,12 @@ class SearchBooks extends Component {
     })
     return (
       <div>
+        <Notification />
         <Card style={cardStyle}>
-          <Card.Header>Book Search</Card.Header>
+          <Card.Header>
+            <FontAwesomeIcon icon={faBook} />
+            {' '}Book Search
+          </Card.Header>
           <Card.Body>
             <Form onSubmit={this.onSubmit}>
               <Form.Group controlId='formGroupSearch'>
@@ -84,7 +79,10 @@ class SearchBooks extends Component {
           </Card.Body>
         </Card>
         <Card style={cardStyle}>
-          <Card.Header>Results</Card.Header>
+          <Card.Header>
+            <FontAwesomeIcon icon={faBookOpen} />
+            {' '}Results
+          </Card.Header>
           <Card.Body>
             <Container>
               {books.length ? books : <span>No Results</span>}
