@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const booksController = require('../controllers/dbController')
+const booksController = require('../controllers/db.controller')
 
 // Matches with "/books"
 router.route('/')
