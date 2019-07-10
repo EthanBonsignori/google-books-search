@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Container, Card } from 'react-bootstrap'
-import BookCard from './BookCard.component.js'
+import BookCard from '../components/BookCard.component'
 
 class SavedBooks extends Component {
   constructor (props) {

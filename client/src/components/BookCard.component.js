@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap'
 import Notification, { notify } from './Notification.component'
-import noThumbnail from '../no-thumbnail.png'
+import noThumbnail from '../assets/images/no-thumbnail.png'
 
 class BookCard extends Component {
   constructor (props) {

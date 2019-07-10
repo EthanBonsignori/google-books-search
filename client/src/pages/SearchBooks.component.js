@@ -3,7 +3,7 @@ import _ from 'lodash'
 import { Container, Card, Form, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import BookCard from './BookCard.component.js'
+import BookCard from '../components/BookCard.component'
 
 class SearchBooks extends Component {
   constructor () {
@@ -31,21 +31,14 @@ class SearchBooks extends Component {
     })
   }
 
-  search (query) {
-    const API_KEY = process.env.REACT_APP_BOOKS_API_KEY
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${query || 'Harry Potter'}&key=${API_KEY}`
-    window.fetch(url, { method: 'GET' })
-      .then(results => {
-        return results.json()
-      })
-      .then(booksJson => {
-        this.setState({
-          books: booksJson.items
-        })
-      })
-      .catch(err => {
-        console.error(err)
-      })
+  async search (query) {
+    let url
+    // if (process.env.NODE_ENV === 'production') url = `/api/${query}`
+    url = `http://localhost:4000/api/${query}`
+    const fetchRes = await window.fetch(url, { method: 'GET', 'Content-Type': 'application/json' })
+    const content = await fetchRes.json()
+    console.log(content)
+    this.setState({ books: content.items })
   }
 
   render () {
