@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   getBooks: async () => {
     const fetchRes = await window.fetch('http://localhost:4000/books', { method: 'GET' })
     const content = await fetchRes.json()
