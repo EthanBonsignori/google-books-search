@@ -1,4 +1,4 @@
-export default {
+const db = {
   getBooks: async () => {
     const fetchRes = await window.fetch('http://localhost:4000/books', { method: 'GET' })
     const content = await fetchRes.json()
@@ -25,3 +25,5 @@ export default {
     return status
   }
 }
+
+export default db
