@@ -1,7 +1,11 @@
 const db = {
   getBooks: async () => {
     console.log('In db.getBooks')
-    const fetchRes = await window.fetch('/books', { method: 'GET' })
+    console.log('NODE_ENV:')
+    console.log(process.env.NODE_ENV)
+    let url = '/books'
+    if (process.env.NODE_ENV === 'development') url = 'http://localhost:4000/books'
+    const fetchRes = await window.fetch(url, { method: 'GET' })
     const content = await fetchRes.json()
     console.log('Content from db.getBooks:')
     console.log(content)
@@ -10,7 +14,9 @@ const db = {
 
   saveBook: async (book) => {
     console.log('In db.saveBook')
-    const fetchRes = await window.fetch('/books', {
+    let url = '/books'
+    if (process.env.NODE_ENV === 'development') url = 'http://localhost:4000/books'
+    const fetchRes = await window.fetch(url, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -26,7 +32,9 @@ const db = {
 
   unsaveBook: async (id) => {
     console.log('In db.unsaveBook')
-    const fetchRes = await window.fetch(`/books/${id}`, { method: 'DELETE' })
+    let url = `/books${id}`
+    if (process.env.NODE_ENV === 'development') url = `http://localhost:4000/books/${id}`
+    const fetchRes = await window.fetch(url, { method: 'DELETE' })
     const status = await fetchRes.json()
     console.log('Content from db.unsaveBook:')
     console.log(status)
