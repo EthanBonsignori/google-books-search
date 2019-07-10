@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Row, Col, Card, Image, Button } from 'react-bootstrap'
-import Notification, { notify } from './Notification.component'
 import { saveBook, unsaveBook } from '../utils/db'
 import noThumbnail from '../assets/images/no-thumbnail.png'
 
@@ -41,13 +40,13 @@ class BookCard extends Component {
       title: this.state.title
     }
     const status = await saveBook(newSavedBook)
-    notify(status.message)
+    this.props.notify(status.message)
   }
 
   async unsaveBook () {
     const id = this.state.id
     const status = await unsaveBook(id)
-    notify(status.message)
+    this.props.notify(status.message)
     this.props.getBooksFromDb()
   }
 
@@ -58,7 +57,6 @@ class BookCard extends Component {
 
     return (
       <div>
-        <Notification />
         <Card style={{ marginTop: '1rem' }}>
           <Card.Header>
             {this.state.title}

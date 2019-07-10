@@ -39,6 +39,7 @@ class SavedBooks extends Component {
         link={book.link}
         title={book.title}
         getBooksFromDb={this.getBooksFromDb}
+        notify={this.props.notify}
       />
     })
 

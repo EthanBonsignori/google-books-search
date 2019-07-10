@@ -5,11 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons'
 import api from '../utils/api'
 import BookCard from '../components/BookCard.component'
-import Notification, { notify } from '../components/Notification.component'
 
 class SearchBooks extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
 
     this.state = {
       query: ''
@@ -35,7 +34,7 @@ class SearchBooks extends Component {
 
   async search (query) {
     const content = await api.searchGoogleBooks(query)
-    if (content.error) return notify(content.message)
+    if (content.error) return this.props.notify(content.message)
     this.setState({ books: content.items })
   }
 
@@ -52,11 +51,11 @@ class SearchBooks extends Component {
         image={hasImage ? bookInfo.imageLinks.thumbnail : 'false'}
         link={bookInfo.infoLink}
         title={bookInfo.title}
+        notify={this.props.notify}
       />
     })
     return (
       <div>
-        <Notification />
         <Card style={cardStyle}>
           <Card.Header>
             <FontAwesomeIcon icon={faBook} />
