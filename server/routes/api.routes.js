@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const apiController = require('../controllers/apiController')
+const apiController = require('../controllers/api.controller')
 
 // Matches with '/api/:query'
 router.route('/:query')
