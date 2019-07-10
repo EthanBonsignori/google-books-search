@@ -4,7 +4,7 @@ const db = {
     console.log('NODE_ENV:')
     console.log(process.env.NODE_ENV)
     let url = '/books'
-    if (process.env.NODE_ENV === 'development') url = 'http://localhost:4000/books'
+    // if (process.env.NODE_ENV === 'development') url = 'http://localhost:4000/books'
     const fetchRes = await window.fetch(url, { method: 'GET' })
     const content = await fetchRes.json()
     console.log('Content from db.getBooks:')
@@ -15,7 +15,7 @@ const db = {
   saveBook: async (book) => {
     console.log('In db.saveBook')
     let url = '/books'
-    if (process.env.NODE_ENV === 'development') url = 'http://localhost:4000/books'
+    // if (process.env.NODE_ENV === 'development') url = 'http://localhost:4000/books'
     const fetchRes = await window.fetch(url, {
       method: 'POST',
       headers: {
@@ -33,7 +33,7 @@ const db = {
   unsaveBook: async (id) => {
     console.log('In db.unsaveBook')
     let url = `/books${id}`
-    if (process.env.NODE_ENV === 'development') url = `http://localhost:4000/books/${id}`
+    // if (process.env.NODE_ENV === 'development') url = `http://localhost:4000/books/${id}`
     const fetchRes = await window.fetch(url, { method: 'DELETE' })
     const status = await fetchRes.json()
     console.log('Content from db.unsaveBook:')
